@@ -8,10 +8,23 @@
 </head>
 
 <body>
- <!-- Study group did the first portion of the homework together. Jonanthan and I were the only ones in the group that day -->
+	<!-- Study group did the first portion of the homework together. Jonanthan and I were the only ones in the group that day -->
 	<h1>Hangwoman</h1>
 	<hr>
-	<h1>Please guess a letter:</h1>
+	<div class="row">
+		<div class="column">
+			<h1>Please guess a letter:</h1>
+		</div>
+		<div class="column">
+			<div class="score">
+				<h1>Score</h1>
+				<div class="wins">Wins: </div>
+				<div class="losses">Losses: </div>
+				<div class="lives">Lives: </div>
+				<div class="lettersTried">Tried Letters: </div>
+			</div>
+		</div>
+	</div>
 	<div class="hangman">
 		<div class="letter0">
 			<h1>-</h1>
@@ -27,7 +40,7 @@
 		</div>
 	</div>
 	<div class="text-field">
-		<input placeholder="Type Guess Here" id="guessBox" >
+		<input placeholder="Type Guess Here" id="guessBox">
 		<button type="submit" onclick="hangwoman()">Submit Guess</button>
 	</div>
 
@@ -47,45 +60,65 @@
 		//document.getElementById("demo").innerHTML = res;
 		//this should allow you to not have to type the second array.  
 		//issue with repeating letter in words-array. ask TA about resolve issues 
-					//use words[test] for testing
-					//change $(".letter0")<--be sure to **change letter0** 
-					//**switch numberGuess to 9 later**
+		//use words[test] for testing
+		//change $(".letter0")<--be sure to **change letter0** 
+		//**switch numberGuess to 9 later**
 		var numberGuess = 2;
+		var wins = 0;
+		var losses = 0;
+		var lives = 0;
+		var lettersTried = [];
+
+		var score = {
+			wins: 0,
+			losses: 0,
+			add: function (event) {
+				if (event = "win") {
+					this.wins += 1;
+				},
+				else{
+				this.losses += 1;
+			},
+		}
+
 		function hangwoman() {
 			numberGuess--;
-			var	guess = document.getElementById("guessBox").value;
-			
-				if (wordPicked.includes(guess)) {
-					alert("YAS, QUEEN!");
-					var letter = wordPicked.indexOf(guess);
-					$(".letter0").html("<h1>" + guess + "</h1>");
+			var guess = document.getElementById("guessBox").value;
 
-				}
-				// Display wordPicked 
-				else if (wordPicked.includes(guess)) {
-					alert("YAS, QUEEN!");
-					var letter = wordPicked.indexOf(guess);
-					
-					$(".letter1").html("<h1>" + guess + "</h1>");
+			if (wordPicked.includes(guess)) {
+				
+				alert("YAS, QUEEN!");
+				var letter = wordPicked.indexOf(guess);
+				
+				$(".letter0").html("<h1>" + guess + "</h1>");
 
-				}
-				else if (wordPicked.includes(guess)) {
-					alert("YAS, QUEEN!");
-					var letter = wordPicked.indexOf(guess);
-					$(".letter2").html("<h1>" + guess + "</h1>");
-
-				}
-				else if (wordPicked.includes(guess)) {
-					alert("YAS, QUEEN!");
-					var letter = wordPicked.indexOf(guess);
-					$(".letter3").html("<h1>" + guess + "</h1>");
-
-				}
-				else {
-					alert("wrong! Try again!");
-				}
 			}
-		
+			// Display wordPicked 
+			else if (wordPicked.includes(guess)) {
+				alert("YAS, QUEEN!");
+				var letter = wordPicked.indexOf(guess);
+				$(".letter1").html("<h1>" + guess + "</h1>");
+
+			}
+			else if (wordPicked.includes(guess)) {
+				alert("YAS, QUEEN!");
+				var letter = wordPicked.indexOf(guess);
+				$(".letter2").html("<h1>" + guess + "</h1>");
+
+			}
+			else if (wordPicked.includes(guess)) {
+				alert("YAS, QUEEN!");
+				var letter = wordPicked.indexOf(guess);
+				$(".letter3").html("<h1>" + guess + "</h1>");
+
+			}
+			else {
+				alert("wrong! Try again!");
+				lettersTried.push(guess);
+				console.log(lettersTried);
+			}
+		}
+
 
 	</script>
 </body>
